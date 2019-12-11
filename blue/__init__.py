@@ -3,9 +3,11 @@ from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask_migrate import Migrate
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
 migrate = Migrate()
+ma = Marshmallow()
 
 
 def create_app(config_class=Config):
@@ -19,6 +21,9 @@ def create_app(config_class=Config):
         db.create_all()
 
     from blue.api.routes import mod as mod
+    app.register_blueprint(mod)
+
+    from blue.utilities.utilities import mod as mod
     app.register_blueprint(mod)
 
     return app
