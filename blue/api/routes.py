@@ -35,7 +35,6 @@ def add_employee():
 def get_employee():
     try:
         employee_id = request.args.get('id')
-
         employee = Employee.query.filter_by(id=employee_id).first()
         employee_schema = EmployeeSchema()
         print(employee)
